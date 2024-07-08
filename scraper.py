@@ -52,6 +52,7 @@ def fetch_project_details(project_id, headers):
     return 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'
 
 def main():
+    print("Script Started")
     json_data = {
         'userId': 0,
         'userName': 'Enter your bits email ID',
@@ -82,6 +83,9 @@ def main():
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             }
+
+            print("Scraping started")
+            print("Do not exit, scraping takes around 10-15 minutes depending on your internet speed")
 
             station_ids = fetch_station_ids(userName, headers)
             output_data = []
