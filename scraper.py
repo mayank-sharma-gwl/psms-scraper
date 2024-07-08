@@ -58,7 +58,7 @@ def main():
         'name': '',
         'roleId': 0,
         'roleName': '',
-        'password': 'Enter your password',
+        'password': 'Enter your PSMS password',
     }
 
     userName = json_data.get('userName')
