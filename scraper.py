@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 
 def fetch_station_ids(username, headers):
-    url = f'https://bits-psms-api-prod.azurewebsites.net/api/StationAllotment/stationFinalPreferenceByStudent/{username}'
+    url = f'https://psms.bits-pilani.ac.in/api/api/StationAllotment/stationFinalPreferenceByStudent/{username}'
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         station_data = response.json()
@@ -11,7 +11,7 @@ def fetch_station_ids(username, headers):
     return []
 
 def fetch_net_reqs(station_id, headers):
-    url = f"https://bits-psms-api-prod.azurewebsites.net/api/ProblemBank/listview/?stationId={station_id}"
+    url = f"https://psms.bits-pilani.ac.in/api/api/ProblemBank/listview/?stationId={station_id}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         problem_bank_data = response.json().get('problemBankGridLines', [])
@@ -20,7 +20,7 @@ def fetch_net_reqs(station_id, headers):
     return None
 
 def fetch_problem_bank_id(userName, station_id, headers):
-    url = f"https://bits-psms-api-prod.azurewebsites.net/api/stationallotment/student/preference/problembanks?stationId={station_id}&userName={userName}"
+    url = f"https://psms.bits-pilani.ac.in/api/api/stationallotment/student/preference/problembanks?stationId={station_id}&userName={userName}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         problem_bank_data = response.json().get('problemBankGridLines', [])
@@ -29,14 +29,14 @@ def fetch_problem_bank_id(userName, station_id, headers):
     return None, None, None, None, None
 
 def fetch_projects(userName, problem_bank_id, headers):
-    url = f"https://bits-psms-api-prod.azurewebsites.net/api/stationallotment/student/preference/projects?problemBankId={problem_bank_id}&userName={userName}"
+    url = f"https://psms.bits-pilani.ac.in/api/api/stationallotment/student/preference/projects?problemBankId={problem_bank_id}&userName={userName}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         return response.json().get('projectGridLines', [])
     return []
 
 def fetch_project_details(project_id, headers):
-    url = f"https://bits-psms-api-prod.azurewebsites.net/api/ProblemBank/project/{project_id}?expand=all"
+    url = f"https://psms.bits-pilani.ac.in/api/api/ProblemBank/project/{project_id}?expand=all"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         project_data = response.json()
@@ -64,7 +64,7 @@ def main():
 
     userName = json_data.get('userName')
 
-    login_url = 'https://bits-psms-api-prod.azurewebsites.net/api/Users/login'
+    login_url = 'https://psms.bits-pilani.ac.in/api/api/Users/login'
 
     with requests.Session() as s:
         login_response = s.post(login_url, json=json_data)
